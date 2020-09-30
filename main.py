@@ -18,9 +18,9 @@ class MyEventHandler(FileSystemEventHandler):
     def on_created(self, event):
         logging.debug("Something has been created... %s", event.src_path)
         filename = str(event.src_path)
-        if filename.endswith(".jpg"):
+        if filename.endswith(".jpg") or filename.endswith(".png"):
             wp = str(PurePath(Path(self.write_path), Path(filename)))
-            logging.info("New jpg file in %s, Creating thumbnail in %s", event.src_path, wp)
+            logging.info("New image file in %s, Creating thumbnail in %s", event.src_path, wp)
             image = Image.open(filename)
             max_size = (320, 240)
             image.thumbnail(max_size)
